@@ -11,9 +11,12 @@ angular.module('comment', [])
       		{title:'Comment 5', upvotes:3}
     	];
     	$scope.addComment = function() {
-      		$scope.comments.push({title:'A new comment',upvotes:0});
-   		};
-   		
+      		$scope.comments.push({title:$scope.formContent,upvotes:0});
+      		$scope.formContent='';
+    	};
+    	$scope.incrementUpvotes = function(comment) {
+      		comment.upvotes += 1;
+    	};
 	}
 ]);
 
