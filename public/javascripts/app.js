@@ -4,12 +4,16 @@ angular.module('comment', [])
 	function($scope){
 		$scope.test = 'Hello world';
 		$scope.comments = [
-			'Comment 1',
-			'Comment 2',
-			'Comment 3',
-			'Comment 4',
-			'Comment 5'
-		];
+      		{title:'Comment 1', upvotes:5},
+      		{title:'Comment 2', upvotes:6},
+      		{title:'Comment 3', upvotes:1},
+      		{title:'Comment 4', upvotes:4},
+      		{title:'Comment 5', upvotes:3}
+    	];
+    	$scope.addComment = function() {
+      		$scope.comments.push({title:'A new comment',upvotes:0});
+   		};
+   		
 	}
 ]);
 

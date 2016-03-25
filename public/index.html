@@ -9,8 +9,12 @@
 		{{test}}
 	</div>
 
-	<div ng-repeat="comment in comments">
-	{{comment}}
+	<div ng-repeat="comment in comments | orderBy: '-upvotes'">
+	{{comment.title}} - upvotes: {{comment.upvotes}}
 	</div>
+
+	<button ng-click="addComment()">Add Comment</button>
+
+	
 </body>
 </html>
