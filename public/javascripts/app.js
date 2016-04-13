@@ -1,23 +1,32 @@
-angular.module('comment', [])
-.controller('MainCtrl', [
-	'$scope',
-	function($scope){
-		$scope.test = 'Hello world';
-		$scope.comments = [
-      		{title:'Comment 1', upvotes:5},
-      		{title:'Comment 2', upvotes:6},
-      		{title:'Comment 3', upvotes:1},
-      		{title:'Comment 4', upvotes:4},
-      		{title:'Comment 5', upvotes:3}
-    	];
-    	$scope.addComment = function() {
-      		$scope.comments.push({title:$scope.formContent,upvotes:0});
-      		$scope.formContent='';
-    	};
-    	$scope.incrementUpvotes = function(comment) {
-      		comment.upvotes += 1;
-    	};
-	}
-]);
-
-
+$(document).ready(function() {
+  $("#serialize").click(function() {
+    var myobj = {
+      Name: $("#Name").val(),
+      Comment: $("#Comment").val()
+    };
+    jobj = JSON.stringify(myobj);
+    $("#json").text(jobj);
+    var url = "comment";
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: jobj,
+      contentType: "application/json; charset=utf-8",
+      success: function(data, textStatus) {
+        $("#done").html(textStatus);
+      }
+    })
+  });
+  $("#getThem").click(function() {
+      $.getJSON('comment', function(data) {
+        console.log(data);
+        var everything = "<ul>";
+        for(var comment in data) {
+          com = data[comment];
+          everything += "<li>Name: " + com.Name + " -- Comment: " + com.Comment + "</li>";
+        }
+        everything += "</ul>";
+        $("#comments").html(everything);
+      })
+    })
+});
